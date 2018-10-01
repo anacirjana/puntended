@@ -1,4 +1,6 @@
 from flask import Flask, url_for, render_template
+import random
+import utils
 
 puntended = Flask(__name__)
 HOST = 'host'
@@ -10,11 +12,13 @@ def hello():
 
 @puntended.route('/' + HOST)
 def host():
-	return render_template(HOST + '.html')
+    code = utils.generate_roomcode()
+    return render_template(HOST + '.html', roomcode = code)
 
 @puntended.route('/' + CLIENT)
 def client():
     return render_template(CLIENT + '.html')
 
 if __name__ == "__main__":
-	puntended.run()
+    random.seed(1000)
+    puntended.run()
