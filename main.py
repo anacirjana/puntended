@@ -1,18 +1,20 @@
-from flask import Flask
+from flask import Flask, url_for, render_template
 
 puntended = Flask(__name__)
+HOST = 'host'
+CLIENT = 'play'
 
 @puntended.route("/")
 def hello():
-	return "Helloooo"
+    return render_template('index.html')
 
-@puntended.route("/host")
+@puntended.route('/' + HOST)
 def host():
-	return 'You are hosting the game <input type="submit" name="submit_button" value="Do Something">'
-'''
-@puntended.route("/play")
-def host():
-	return "You are playing the game"
-'''
+	return render_template(HOST + '.html')
+
+@puntended.route('/' + CLIENT)
+def client():
+    return render_template(CLIENT + '.html')
+
 if __name__ == "__main__":
 	puntended.run()
